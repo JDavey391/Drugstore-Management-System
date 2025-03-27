@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediTrack - Pharmacy Management System</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --background-light: #f4f6f9;
+            --text-color: #333;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-light);
+            color: var(--text-color);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .navbar-nav {
+            display: flex;
+            list-style: none;
+        }
+
+        .navbar-nav li {
+            margin-left: 20px;
+        }
+
+        .navbar-nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Login Page */
+        .login-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 60px);
+        }
+
+        .login-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-secondary {
+            background-color: var(--warning-color);
+        }
+
+        .btn-danger {
+            background-color: var(--accent-color);
+        }
+
+        /* Dashboard Styles */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .dashboard-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .dashboard-card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .dashboard-card-title {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .dashboard-card-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        /* Inventory Table */
+        .inventory-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .inventory-table th, 
+        .inventory-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .inventory-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Inventory Header */
+        .inventory-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .inventory-header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .close-btn {
+            float: right;
+            font-size: 25px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .error-message {
+            color: var(--accent-color);
+            font-size: 0.8rem;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+        /* Sales Report Styles */
+        .sales-report-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .export-import-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .export-import-section input[type="file"] {
+            display: none;
+        }
+
+        .export-import-label {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .export-import-label:hover {
+            background-color: #2980b9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .inventory-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .inventory-header-buttons {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .inventory-header-buttons .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease forwards;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="navbar-brand">MediTrack</a>
+            <ul class="navbar-nav">
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#inventory">Inventory</a></li>
+                <li><a href="#logout">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Login Page -->
+    <div class="container login-page" id="login-section">
+        <div class="login-container">
+            <h2>Pharmacy Management Login</h2>
+            <form id="login-form">
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="username" 
+                    placeholder="Username" 
+                    required 
+                    minlength="4" 
+                    maxlength="20"
+                >
+                <div id="username-error" class="error-message"></div>
+                
+                <input 
+                    type="password" 
+                    class="form-control" 
+                    id="password" 
+                    placeholder="Password" 
+                    required 
+                    minlength="8"
+                >
+                <div id="password-error" class="error-message"></div>
+                
+                <button type="submit" class="btn">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="container" id="dashboard" style="display:none;">
+        <h1 style="margin: 20px 0; color: var(--primary-color);">Dashboard</h1>
+        <div class="dashboard-grid">
+            <div class="dashboard-card animate-fade-in">
+                <div class="dashboard-card-icon" style="color: var(--secondary-color);">📦</div>
+                <h3 class="dashboard-card-title">Total Medicines</h3>
+                <p class="dashboard-card-value" id="total-medicines">150</p>
+            </div>
+            <div class="dashboard-card animate-fade-in">
+                <div class="dashboard-card-icon" style="color: var(--accent-color);">⚠️</div>
+                <h3 class="dashboard-card-title">Low Stock</h3>
+                <p class="dashboard-card-value" id="low-stock">12</p>
+            </div>
+            <div class="dashboard-card animate-fade-in">
+                <div class="dashboard-card-icon" style="color: var(--warning-color);">❌</div>
+                <h3 class="dashboard-card-title">Expired Medicines</h3>
+                <p class="dashboard-card-value" id="expired-medicines">5</p>
+            </div>
+            <div class="dashboard-card animate-fade-in">
+                <div class="dashboard-card-icon" style="color: var(--success-color);">💰</div>
+                <h3 class="dashboard-card-title">Today's Sales</h3>
+                <p class="dashboard-card-value" id="today-sales">$1,250</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inventory Management -->
+    <div class="container" id="inventory" style="display:none;">
+        <div class="inventory-header">
+            <h1 style="color: var(--primary-color);">Inventory Management</h1>
+            <div class="inventory-header-buttons">
+                <button id="add-medicine-btn" class="btn">Add Medicine</button>
+                <button id="record-sale-btn" class="btn">Record Sale</button>
+            </div>
+        </div>
+        
+        <table class="inventory-table">
+            <thead>
+                <tr>
+                    <th>Medicine Name</th>
+                    <th>Category</th>
+                    <th>Stock</th>
+                    <th>Expiry Date</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="medicine-list">
+                <tr>
+                    <td>Paracetamol</td>
+                    <td>Pain Killer</td>
+                    <td>50</td>
+                    <td>2025-06-10</td>
+                    <td>$5.00</td>
+                    <td class="action-buttons">
+                        <button class="btn btn-secondary edit-btn" style="width:auto;">Edit</button>
+                        <button class="btn btn-danger delete-btn" style="width:auto;">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Add Medicine Modal -->
+    <div id="add-medicine-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Add New Medicine</h2>
+            <form id="add-medicine-form">
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Medicine Name" 
+                    required 
+                    minlength="3" 
+                    maxlength="50"
+                >
+                <div id="medicine-name-error" class="error-message"></div>
+
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Category" 
+                    required 
+                    minlength="3" 
+                    maxlength="30"
+                >
+                <div id="category-error" class="error-message"></div>
+
+                <input 
+                    type="number" 
+                    class="form-control" 
+                    placeholder="Stock Quantity" 
+                    required 
+                    min="0" 
+                    max="10000"
+                >
+                <div id="stock-error" class="error-message"></div>
+
+                <input 
+                    type="date" 
+                    class="form-control" 
+                    placeholder="Expiry Date" 
+                    required
+                >
+                <div id="expiry-error" class="error-message"></div>
+
+                <input 
+                    type="number" 
+                    step="0.01" 
+                    class="form-control" 
+                    placeholder="Price" 
+                    required 
+                    min="0.01" 
+                    max="1000"
+                >
+                <div id="price-error" class="error-message"></div>
+
+                <button type="submit" class="btn">Save Medicine</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Sales Modal -->
+    <div id="add-sales-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Record New Sale</h2>
+            <form id="add-sales-form">
+                <select class="form-control" id="sale-medicine" required>
+                    <option value="">Select Medicine</option>
+                    <!-- Medicine options will be dynamically populated -->
+                </select>
+                <div id="sale-medicine-error" class="error-message"></div>
+
+                <input 
+                    type="number" 
+                    class="form-control" 
+                    id="sale-quantity" 
+                    placeholder="Quantity" 
+                    required 
+                    min="1"
+                >
+                <div id="sale-quantity-error" class="error-message"></div>
+
+                <input 
+                    type="date" 
+                    class="form-control" 
+                    id="sale-date" 
+                    required
+                >
+                <div id="sale-date-error" class="error-message"></div>
+
+                <button type="submit" class="btn">Record Sale</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sales Report Section -->
+    <div class="container" id="sales-report" style="display:none;">
+        <h1 style="margin: 20px 0; color: var(--primary-color);">Sales Report</h1>
+        
+        <div class="sales-report-container">
+            <table class="inventory-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Medicine</th>
+                        <th>Quantity</th>
+                        <th>Total Sales</th>
+                    </tr>
+                </thead>
+                <tbody id="sales-list">
+                    <!-- Sales entries will be dynamically added here -->
+                </tbody>
+            </table>
+
+            <div class="export-import-section">
+                <label for="import-sales" class="export-import-label">
+                    Import Sales Data
+                    <input type="file" id="import-sales" accept=".csv,.json">
+                </label>
+                <button id="export-sales" class="btn" style="width:auto;">Export Sales Data</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('login-form');
+            const loginSection = document.getElementById('login-section');
+            const dashboardSection = document.getElementById('dashboard');
+            const inventorySection = document.getElementById('inventory');
+            
+            // Enhanced Login Validation
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const usernameError = document.getElementById('username-error');
+            const passwordError = document.getElementById('password-error');
+
+            function validateLogin() {
+                // Username validation
+                if (usernameInput.value.length < 4) {
+                    usernameError.textContent = "Username must be at least 4 characters";
+                    return false;
+                } else if (!/^[a-zA-Z0-9_]+$/.test(usernameInput.value)) {
+                    usernameError.textContent = "Username can only contain letters, numbers, and underscores";
+                    return false;
+                } else {
+                    usernameError.textContent = "";
+                }
+
+                // Password validation
+                if (passwordInput.value.length < 8) {
+                    passwordError.textContent = "Password must be at least 8 characters";
+                    return false;
+                } else if (!/(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])/.test(passwordInput.value)) {
+                    passwordError.textContent = "Password must include uppercase, lowercase, number, and special character";
+                    return false;
+                } else {
+                    passwordError.textContent = "";
+                }
+
+                return true;
+            }
+
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (validateLogin()) {
+                    loginSection.style.display = 'none';
+                    dashboardSection.style.display = 'block';
+                    inventorySection.style.display = 'block';
+                }
+            });
+
+            // Add Medicine Modal
+            const addMedicineBtn = document.getElementById('add-medicine-btn');
+            const addMedicineModal = document.getElementById('add-medicine-modal');
+            const closeModalBtn = document.querySelector('.close-btn');
+            const addMedicineForm = document.getElementById('add-medicine-form');
+
+            addMedicineBtn.addEventListener('click', () => {
+                addMedicineModal.style.display = 'block';
+            });
+
+            closeModalBtn.addEventListener('click', () => {
+                addMedicineModal.style.display = 'none';
+            });
+
+            // Enhanced Add Medicine Form Validation
+            function validateMedicineForm(form) {
+                const inputs = form.querySelectorAll('input');
+                const errorDivs = form.querySelectorAll('.error-message');
+                
+                const validations = [
+                    { input: inputs[0], errorDiv: errorDivs[0], validate: (val) => val.length >= 3 && val.length <= 50 },
+                    { input: inputs[1], errorDiv: errorDivs[1], validate: (val) => val.length >= 3 && val.length <= 30 },
+                    { input: inputs[2], errorDiv: errorDivs[2], validate: (val) => val >= 0 && val <= 10000 },
+                    { input: inputs[3], errorDiv: errorDivs[3], validate: (val) => new Date(val) > new Date() },
+                    { input: inputs[4], errorDiv: errorDivs[4], validate: (val) => val > 0 && val <= 1000 }
+                ];
+
+                let isValid = true;
+                validations.forEach(({ input, errorDiv, validate }) => {
+                    if (!validate(input.value)) {
+                        errorDiv.textContent = `Invalid ${input.placeholder.toLowerCase()}`;
+                        isValid = false;
+                    } else {
+                        errorDiv.textContent = '';
+                    }
+                });
+
+                return isValid;
+            }
+
+            // Add Medicine Form Submission
+            addMedicineForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (validateMedicineForm(addMedicineForm)) {
+                    const medicineList = document.getElementById('medicine-list');
+                    const formInputs = addMedicineForm.querySelectorAll('input');
+                    
+                    // Create new table row
+                    const newRow = document.createElement('tr');
+                    newRow.innerHTML = `
+                        <td>${formInputs[0].value}</td>
+                        <td>${formInputs[1].value}</td>
+                        <td>${formInputs[2].value}</td>
+                        <td>${formInputs[3].value}</td>
+                        <td>$${parseFloat(formInputs[4].value).toFixed(2)}</td>
+                        <td class="action-buttons">
+                            <button class="btn btn-secondary edit-btn" style="width:auto;">Edit</button>
+                            <button class="btn btn-danger delete-btn" style="width:auto;">Delete</button>
+                        </td>
+                    `;
+
+                    medicineList.appendChild(newRow);
+                    addMedicineModal.style.display = 'none';
+                    addMedicineForm.reset();
+
+                    // Update total medicines count
+                    const totalMedicinesEl = document.getElementById('total-medicines');
+                    totalMedicinesEl.textContent = parseInt(totalMedicinesEl.textContent) + 1;
+                }
+            });
+
+            // Delete Medicine Functionality
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('delete-btn')) {
+                    const row = e.target.closest('tr');
+                    row.remove();
+
+                    // Update total medicines count
+                    const totalMedicinesEl = document.getElementById('total-medicines');
+                    totalMedicinesEl.textContent = parseInt(totalMedicinesEl.textContent) - 1;
+                }
+            });
+
+            // Edit Medicine Functionality
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('edit-btn')) {
+                    const row = e.target.closest('tr');
+                    const cells = row.querySelectorAll('td');
+                    
+                    // Populate modal with existing data
+                    addMedicineForm.querySelector('input[placeholder="Medicine Name"]').value = cells[0].textContent;
+                    addMedicineForm.querySelector('input[placeholder="Category"]').value = cells[1].textContent;
+                    addMedicineForm.querySelector('input[placeholder="Stock Quantity"]').value = cells[2].textContent;
+                    addMedicineForm.querySelector('input[placeholder="Expiry Date"]').value = cells[3].textContent;
+                    addMedicineForm.querySelector('input[placeholder="Price"]').value = cells[4].textContent.replace('$', '');
+                    
+                    // Show modal
+                    addMedicineModal.style.display = 'block';
+                    
+                    // Remove the original row after editing
+                    row.remove();
+                }
+                
+            });
+            
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            // Previous JavaScript remains the same, with additional functionality
+
+            // Sales Management
+            const salesSection = document.getElementById('sales-report');
+            const addSalesBtn = document.createElement('button');
+            addSalesBtn.textContent = 'Record Sale';
+            addSalesBtn.classList.add('btn');
+            addSalesBtn.style.width = 'auto';
+            addSalesBtn.style.marginBottom = '20px';
+
+            // Sales Modal Setup
+            const addSalesModal = document.getElementById('add-sales-modal');
+            const closeSalesModalBtn = addSalesModal.querySelector('.close-btn');
+            const addSalesForm = document.getElementById('add-sales-form');
+            const saleMedicineSelect = document.getElementById('sale-medicine');
+            const salesList = document.getElementById('sales-list');
+
+            // Sales Data Storage
+            let salesData = [];
+            let inventoryData = [];
+
+            // Populate Medicine Dropdown
+            function updateMedicineDropdown() {
+                const medicineList = document.getElementById('medicine-list');
+                saleMedicineSelect.innerHTML = '<option value="">Select Medicine</option>';
+                
+                medicineList.querySelectorAll('tr').forEach(row => {
+                    const medicineName = row.querySelector('td:first-child').textContent;
+                    const option = document.createElement('option');
+                    option.value = medicineName;
+                    option.textContent = medicineName;
+                    saleMedicineSelect.appendChild(option);
+                });
+            }
+
+            // Function to add sales entry
+            function addSalesEntry(medicine, quantity, date) {
+                const medicineRow = Array.from(document.getElementById('medicine-list').querySelectorAll('tr'))
+                    .find(row => row.querySelector('td:first-child').textContent === medicine);
+                
+                const price = parseFloat(medicineRow.querySelector('td:nth-child(5)').textContent.replace('$', ''));
+                const totalSales = (price * quantity).toFixed(2);
+
+                const newSaleEntry = document.createElement('tr');
+                newSaleEntry.innerHTML = `
+                    <td>${date}</td>
+                    <td>${medicine}</td>
+                    <td>${quantity}</td>
+                    <td>$${totalSales}</td>
+                `;
+                salesList.appendChild(newSaleEntry);
+
+                // Update sales data array
+                salesData.push({
+                    date,
+                    medicine,
+                    quantity: parseInt(quantity),
+                    totalSales: parseFloat(totalSales)
+                });
+
+                // Update Today's Sales
+                const todaySalesEl = document.getElementById('today-sales');
+                const currentSales = parseFloat(todaySalesEl.textContent.replace('$', '').replace(',', ''));
+                todaySalesEl.textContent = `$${(currentSales + parseFloat(totalSales)).toLocaleString()}`;
+
+                // Update medicine stock
+                const stockCell = medicineRow.querySelector('td:nth-child(3)');
+                const currentStock = parseInt(stockCell.textContent);
+                stockCell.textContent = currentStock - quantity;
+            }
+
+            // Sales Modal Event Listeners
+            addSalesBtn.addEventListener('click', () => {
+                updateMedicineDropdown();
+                addSalesModal.style.display = 'block';
+            });
+
+            closeSalesModalBtn.addEventListener('click', () => {
+                addSalesModal.style.display = 'none';
+            });
+
+            addSalesForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const medicine = saleMedicineSelect.value;
+                const quantity = document.getElementById('sale-quantity').value;
+                const date = document.getElementById('sale-date').value;
+
+                // Validation
+                let isValid = true;
+                if (!medicine) {
+                    document.getElementById('sale-medicine-error').textContent = 'Please select a medicine';
+                    isValid = false;
+                } else {
+                    document.getElementById('sale-medicine-error').textContent = '';
+                }
+
+                if (quantity <= 0) {
+                    document.getElementById('sale-quantity-error').textContent = 'Quantity must be greater than 0';
+                    isValid = false;
+                } else {
+                    document.getElementById('sale-quantity-error').textContent = '';
+                }
+
+                if (!date) {
+                    document.getElementById('sale-date-error').textContent = 'Please select a date';
+                    isValid = false;
+                } else {
+                    document.getElementById('sale-date-error').textContent = '';
+                }
+
+                if (isValid) {
+                    addSalesEntry(medicine, quantity, date);
+                    addSalesModal.style.display = 'none';
+                    addSalesForm.reset();
+                }
+            });
+
+            // Export Sales Data
+            document.getElementById('export-sales').addEventListener('click', () => {
+                const csvContent = [
+                    "Date,Medicine,Quantity,Total Sales",
+                    ...salesData.map(sale => 
+                        `${sale.date},${sale.medicine},${sale.quantity},$${sale.totalSales}`
+                    )
+                ].join("\n");
+
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement("a");
+                const url = URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", "sales_report.csv");
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+
+            // Import Sales Data
+            document.getElementById('import-sales').addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+
+                reader.onload = (event) => {
+                    const importedData = event.target.result;
+                    const rows = importedData.split('\n').slice(1); // Skip header
+
+                    rows.forEach(row => {
+                        if (row.trim()) {
+                            const [date, medicine, quantity, totalSales] = row.split(',');
+                            addSalesEntry(medicine, quantity, date);
+                        }
+                    });
+                };
+
+                reader.readAsText(file);
+            });
+
+            // Update Navigation to Include Sales
+            const navbarNav = document.querySelector('.navbar-nav');
+            const salesNavItem = document.createElement('li');
+            const salesNavLink = document.createElement('a');
+            salesNavLink.href = '#sales-report';
+            salesNavLink.textContent = 'Sales';
+            salesNavLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                dashboardSection.style.display = 'none';
+                inventorySection.style.display = 'none';
+                salesSection.style.display = 'block';
+            });
+            salesNavItem.appendChild(salesNavLink);
+            navbarNav.insertBefore(salesNavItem, navbarNav.lastElementChild);
+
+            // Add Sales Button to Inventory Section
+            const inventoryHeader = document.querySelector('#inventory > div');
+            inventoryHeader.appendChild(addSalesBtn);
+
+            // Navigation Event Listeners
+            document.querySelectorAll('.navbar-nav a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (e.target.textContent === 'Dashboard') {
+                        dashboardSection.style.display = 'block';
+                        inventorySection.style.display = 'none';
+                        salesSection.style.display = 'none';
+                    } else if (e.target.textContent === 'Inventory') {
+                        dashboardSection.style.display = 'none';
+                        inventorySection.style.display = 'block';
+                        salesSection.style.display = 'none';
+                    }
+                });
+            });
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            // Existing code with updated event listeners for new buttons
+
+            const recordSaleBtn = document.getElementById('record-sale-btn');
+            const addSalesModal = document.getElementById('add-sales-modal');
+            const closeSalesModalBtn = addSalesModal.querySelector('.close-btn');
+            const addSalesForm = document.getElementById('add-sales-form');
+
+            recordSaleBtn.addEventListener('click', () => {
+                updateMedicineDropdown();
+                addSalesModal.style.display = 'block';
+            });
+
+            closeSalesModalBtn.addEventListener('click', () => {
+                addSalesModal.style.display = 'none';
+            });
+
+            // Rest of the existing JavaScript remains the same
+        });
+        
+    </script>
+</body>
+</html>
