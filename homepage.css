@@ -1,0 +1,104 @@
+.homepage {
+    padding: 20px;
+}
+
+.homepage h2 {
+    color: #1a237e;
+    margin-bottom: 20px;
+}
+
+.homepage-content {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 15px;
+}
+.agenda, .calendar, .promos-section {
+    background-color: white;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.agenda h3, .calendar h3, .promos-section h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.agenda ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.agenda ul li {
+    margin-bottom: 8px;
+}
+
+.agenda ul li input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.agenda ul li input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.agenda .date-display {
+    color: #7f8c8d;
+    font-size: 0.9em;
+    margin-top: 15px;
+    text-align: right;
+}
+
+.calendar .month-header {
+    background-color: #e74c3c; /* Red color from the image */
+    color: white;
+    padding: 10px;
+    border-radius: 3px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    text-align: center;
+}
+
+.calendar-grid .day {
+    padding: 8px;
+    border-radius: 3px;
+    color: #2c3e50;
+}
+
+.calendar-grid .inactive {
+    color: #999;
+}
+
+.calendar-grid .active {
+    background-color: #3498db; /* Blue color for the 13th */
+    color: white;
+}
+
+.calendar-grid .current {
+    background-color: #f39c12; /* Orange color for the 17th */
+    color: white;
+}
+
+.promos-section .promo-box {
+    border: 2px solid #27ae60; /* Green border */
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.promo-box p {
+    margin: 0;
+}

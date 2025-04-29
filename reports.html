@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - PharmTrack</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="reports.css">
+</head>
+<body>
+    <header>
+        <h1>PharmTrack</h1>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <ul class="menu">
+                <li><a href="homepage.html">Homepage</a></li>
+                <li><a href="dashboard_user.html">Dashboard</a></li>
+                <li><a href="inventory.html">Inventory Stocks</a></li>
+                <li><a href="orders.html">Orders</a></li>
+                <li><a href="suppliers.html">Suppliers</a></li>
+                <li><a href="expired_products.html">Expired Products</a></li>
+                <li class="active">Reports</li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </aside>
+        <main class="main-content reports-page">
+            <h2>Reports</h2>
+
+            <div class="reports-options">
+                <h3>Generate Report</h3>
+                <div class="report-selection">
+                    <label for="report-type">Report Type:</label>
+                    <select id="report-type">
+                        <option value="">Select a Report</option>
+                        <option value="inventory-summary">Inventory Summary</option>
+                        <option value="sales-report">Sales Report</option>
+                        <option value="low-stock-report">Low Stock Report</option>
+                        <option value="expired-products-report">Expired Products Report</option>
+                        <option value="order-history">Order History</option>
+                        </select>
+                </div>
+
+                <div class="date-range-filter" id="date-range-filter" style="display:none;">
+                    <label for="start-date">Start Date:</label>
+                    <input type="date" id="start-date">
+                    <label for="end-date">End Date:</label>
+                    <input type="date" id="end-date">
+                </div>
+
+                <button id="generate-report-button">Generate Report</button>
+            </div>
+
+            <div class="report-output" id="report-output">
+                <h3>Report Output</h3>
+                <div id="report-content">
+                    <p>No report generated yet.</p>
+                </div>
+                <button id="download-report-button" style="display:none;">Download Report</button>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+    <script src="reports.js"></script>
+</body>
+</html>

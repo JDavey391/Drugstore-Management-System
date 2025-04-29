@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expired Products - PharmTrack</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="expired_products.css">
+</head>
+<body>
+    <header>
+        <h1>PharmTrack</h1>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <ul class="menu">
+                <li><a href="homepage.html">Homepage</a></li>
+                <li><a href="dashboard_user.html">Dashboard</a></li>
+                <li><a href="inventory.html">Inventory Stocks</a></li>
+                <li><a href="orders.html">Orders</a></li>
+                <li><a href="suppliers.html">Suppliers</a></li>
+                <li class="active">Expired Products</li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </aside>
+        <main class="main-content expired-products-page">
+            <h2>Expired Products</h2>
+            <div class="expired-products-actions">
+                <div class="filters">
+                    <label for="expiry-date-filter">Filter by Expiry Date:</label>
+                    <input type="date" id="expiry-date-filter">
+                    <button id="apply-expiry-filter">Apply Filter</button>
+                    <button id="clear-expiry-filter">Clear Filter</button>
+                </div>
+                <div class="search-bar main-expired-search">
+                    <input type="text" placeholder="Search by Product Name or Code">
+                </div>
+            </div>
+
+            <div class="expired-products-table-container">
+                <table class="expired-products-table">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Stock</th>
+                            <th>Expiry Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="expired-products-table-body">
+                        <tr><td colspan="6">No expired products found.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="expired-products-stats">
+                <div class="stat-box total-expired">
+                    <span class="stat-label">Total Expired Products:</span>
+                    <span class="stat-value">0</span>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+    <script src="expired_products.js"></script>
+</body>
+</html>

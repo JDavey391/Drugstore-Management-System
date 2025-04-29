@@ -1,0 +1,4 @@
+/* Specific styles for the user dashboard can go here */
+.user-dashboard h2 {
+    color: #2e7d32; /* A different color to distinguish */
+}

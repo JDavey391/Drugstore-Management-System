@@ -1,0 +1,150 @@
+.expired-products-page {
+    padding: 20px;
+}
+
+.expired-products-page h2 {
+    color: #d32f2f; /* Red for expired products heading */
+    margin-bottom: 20px;
+}
+
+.expired-products-actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.expired-products-actions .filters {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.expired-products-actions .filters label {
+    font-size: 0.9em;
+    color: #546e7a;
+}
+
+.expired-products-actions .filters input[type="date"] {
+    padding: 8px;
+    border: 1px solid #b2ebf2;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.expired-products-actions .filters button {
+    background-color: #d32f2f; /* Red for filter buttons */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.expired-products-actions .filters button:hover {
+    background-color: #b71c1c;
+}
+
+.expired-products-actions .main-expired-search {
+    flex-grow: 1;
+    max-width: 400px;
+}
+
+.expired-products-actions .main-expired-search input[type="text"] {
+    padding: 10px;
+    border: 1px solid #b2ebf2;
+    border-radius: 4px;
+    font-size: 0.9em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.expired-products-table-container {
+    overflow-x: auto;
+}
+
+.expired-products-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.expired-products-table th, .expired-products-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.expired-products-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+    color: #546e7a;
+}
+
+.expired-products-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.expired-products-table .expired {
+    color: #d32f2f; /* Red for expired items in the table */
+    font-weight: bold;
+}
+
+.expired-products-table .actions-cell {
+    white-space: nowrap;
+}
+
+.expired-products-table .actions-cell button {
+    background-color: transparent;
+    border: none;
+    padding: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.expired-products-table .actions-cell .remove-btn {
+    color: #d32f2f; /* Red for remove */
+}
+
+.expired-products-stats {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.expired-products-stats .stat-box {
+    background-color: #ffebee; /* Light red background */
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ef9a9a;
+    flex: 1 1 200px;
+    text-align: center;
+}
+
+.expired-products-stats .stat-label {
+    font-size: 0.9em;
+    color: #546e7a;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.expired-products-stats .stat-value {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #d32f2f;
+}
+
+.expired-products-table tbody tr td[colspan="6"] {
+    text-align: center;
+    padding: 15px;
+    color: #7f8c8d;
+}

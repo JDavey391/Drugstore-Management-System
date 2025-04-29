@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - PharmTrack</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="dashboard_user.css">
+</head>
+<body>
+    <header>
+        <h1>PharmTrack</h1>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <ul class="menu">
+                <li><a href="homepage.html">Homepage</a></li>
+                <li class="active">Dashboard</li>
+                <li><a href="inventory.html">Inventory Stocks</a></li>
+                <li><a href="checkout.html">Check Out &amp; Receipt</a></li>
+                <li><a href="orders.html">Orders</a></li>
+                <li><a href="suppliers.html">Suppliers</a></li>
+                <li><a href="expired_products.html">Expired Products</a></li>
+                <li><a href="login_user.html">Log Out</a></li>
+            </ul>
+        </aside>
+        <main class="main-content dashboard user-dashboard">
+            <h2>User Dashboard</h2>
+            <div class="dashboard-widgets">
+                <div class="widget">
+                    <h3>Recent Orders</h3>
+                    <div class="widget-content">
+                        <ul id="recent-orders-list">
+                            <li>No recent orders</li>
+                        </ul>
+                        <button id="view-all-orders">View All Orders</button>
+                    </div>
+                </div>
+                <div class="widget">
+                    <h3>Low Stock Items</h3>
+                    <div class="widget-content">
+                        <ul id="low-stock-items-list">
+                            <li>No low stock items</li>
+                        </ul>
+                        <button id="view-low-stock-inventory">View Inventory</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+    <script src="dashboard_user.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suppliers - PharmTrack</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="suppliers.css">
+</head>
+<body>
+    <header>
+        <h1>PharmTrack</h1>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <ul class="menu">
+                <li><a href="homepage.html">Homepage</a></li>
+                <li><a href="dashboard_user.html">Dashboard</a></li>
+                <li><a href="inventory.html">Inventory Stocks</a></li>
+                <li><a href="orders.html">Orders</a></li>
+                <li class="active">Suppliers</li>
+                <li><a href="expired_products.html">Expired Products</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </aside>
+        <main class="main-content suppliers-page">
+            <h2>Suppliers</h2>
+            <div class="suppliers-actions">
+                <button class="add-supplier-btn">Add New Supplier</button>
+                <div class="main-suppliers-search">
+                    <input type="text" placeholder="Search by Supplier Name or Contact">
+                </div>
+            </div>
+
+            <div class="suppliers-table-container">
+                <table class="suppliers-table">
+                    <thead>
+                        <tr>
+                            <th>Supplier ID</th>
+                            <th>Name</th>
+                            <th>Contact Person</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="suppliers-table-body">
+                        <tr><td colspan="7">No suppliers found.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+    <script src="suppliers.js"></script>
+</body>
+</html>

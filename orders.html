@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders - PharmTrack</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="orders.css">
+</head>
+<body>
+    <header>
+        <h1>PharmTrack</h1>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <ul class="menu">
+                <li><a href="homepage.html">Homepage</a></li>
+                <li><a href="dashboard_user.html">Dashboard</a></li>
+                <li><a href="inventory.html">Inventory Stocks</a></li>
+                <li class="active">Orders</li>
+                <li><a href="suppliers.html">Suppliers</a></li>
+                <li><a href="expired_products.html">Expired Products</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </aside>
+        <main class="main-content orders-page">
+            <h2>Orders</h2>
+            <div class="orders-actions">
+                <button>Add New Order</button>
+                <div class="filters">
+                    <label for="status-filter">Filter by Status:</label>
+                    <select id="status-filter">
+                        <option value="">All Statuses</option>
+                        <option value="pending">Pending</option>
+                        <option value="processing">Processing</option>
+                        <option value="shipped">Shipped</option>
+                        <option value="delivered">Delivered</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                    <label for="date-filter">Filter by Date:</label>
+                    <input type="date" id="date-filter">
+                    <button class="apply-order-filters">Apply Filters</button>
+                </div>
+                <div class="main-orders-search">
+                    <input type="text" placeholder="Search by Order ID or Customer">
+                </div>
+            </div>
+
+            <div class="orders-table-container">
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Order Date</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-table-body">
+                        <tr><td colspan="7">No orders found.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+    <script src="orders.js"></script>
+</body>
+</html>

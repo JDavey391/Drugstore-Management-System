@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Stocks - PharmTrack</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="inventory.css">
+</head>
+<body>
+    <header>
+        <h1>PharmTrack</h1>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <ul class="menu">
+                <li><a href="homepage.html">Homepage</a></li>
+                <li><a href="dashboard_user.html">Dashboard</a></li>
+                <li class="active">Inventory Stocks</li>
+                <li><a href="orders.html">Orders</a></li>
+                <li><a href="suppliers.html">Suppliers</a></li>
+                <li><a href="expired_products.html">Expired Products</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </aside>
+        <main class="main-content inventory-page">
+            <h2>Inventory Stocks</h2>
+            <div class="inventory-actions">
+                <button class="add-item">Add New Item</button>
+                <div class="filters">
+                    <label for="category-filter">Filter by Category:</label>
+                    <select id="category-filter">
+                        <option value="">All Categories</option>
+                        <option value="Pain Relief">Pain Relief</option>
+                        <option value="Antibiotics">Antibiotics</option>
+                        <option value="Vitamins">Vitamins</option>
+                        <option value="Supplements">Supplements</option>
+                        <option value="First Aid">First Aid</option>
+                        </select>
+                    <button class="apply-filters">Apply Filters</button>
+                </div>
+                <div class="main-inventory-search">
+                    <input type="text" placeholder="Search by Product Name or Code">
+                </div>
+            </div>
+
+            <div class="inventory-table-container">
+                <table class="inventory-table">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Stock</th>
+                            <th>Expiry Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventory-table-body">
+                        <tr><td colspan="6">No inventory items found.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="inventory-stats">
+                <div class="stat-box total-items">
+                    <span class="stat-label">Total Items:</span>
+                    <span class="stat-value">0</span>
+                </div>
+                <div class="stat-box low-stock-count">
+                    <span class="stat-label">Low Stock Items:</span>
+                    <span class="stat-value">0</span>
+                </div>
+                <div class="stat-box expiring-soon-count">
+                    <span class="stat-label">Expiring Soon:</span>
+                    <span class="stat-value">0</span>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+    <script src="inventory.js"></script>
+</body>
+</html>
